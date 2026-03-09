@@ -1,0 +1,110 @@
+/**
+ * Navigation Component Styles
+ * 
+ * Modern navigation bar with theme toggle, gradient accent border,
+ * and backdrop blur effect for depth.
+ */
+
+.navigation {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--color-bg-primary);
+  border-bottom: 3px solid transparent;
+  border-image: var(--gradient-primary) 1;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-sm);
+}
+
+.navigation__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-2);
+  height: 60px; /* Between 56-64px as per requirements */
+}
+
+.navigation__links {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+.navigation__link {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--spacing-1) var(--spacing-2);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--radius-base);
+  transition: all var(--transition-base);
+  position: relative;
+}
+
+.navigation__link:hover {
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-secondary);
+}
+
+.navigation__link:focus-visible {
+  outline: 2px solid var(--color-accent-primary);
+  outline-offset: 2px;
+  color: var(--color-text-primary);
+}
+
+.navigation__link--active {
+  color: var(--color-accent-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+.navigation__link--active::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-full);
+}
+
+.navigation__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+/* Responsive behavior for mobile */
+@media (max-width: 768px) {
+  .navigation__container {
+    flex-direction: column;
+    height: auto;
+    padding: var(--spacing-1);
+    gap: var(--spacing-1);
+  }
+
+  .navigation__links {
+    width: 100%;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .navigation__link {
+    width: 100%;
+    justify-content: center;
+    padding: var(--spacing-2);
+    font-size: var(--font-size-sm);
+    /* Ensure minimum touch target size - use relative units */
+    min-height: 2.5rem; /* 40px equivalent */
+  }
+
+  .navigation__actions {
+    width: 100%;
+    justify-content: center;
+  }
+}

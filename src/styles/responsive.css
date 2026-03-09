@@ -1,0 +1,266 @@
+/**
+ * Responsive Layout Styles
+ * 
+ * Mobile-first responsive design with breakpoints for:
+ * - Mobile: 320px - 768px (single column)
+ * - Tablet: 768px - 1024px (2 columns)
+ * - Desktop: 1024px+ (3+ columns)
+ * 
+ * Ensures no horizontal scrolling and proper touch targets on all devices
+ */
+
+/* Base container styles - prevent horizontal overflow */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Main content container */
+main {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Grid layouts - responsive breakpoints */
+.grid-layout {
+  display: grid;
+  gap: var(--spacing-3);
+  width: 100%;
+}
+
+/* Mobile: Single column below 768px */
+@media (max-width: 768px) {
+  .grid-layout {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2);
+  }
+  
+  /* Reduce spacing on mobile */
+  main {
+    padding: var(--spacing-2) !important;
+  }
+  
+  /* Ensure cards don't overflow */
+  .card {
+    max-width: 100%;
+    padding: var(--spacing-3);
+  }
+  
+  /* Smaller icon badges on mobile - use relative units */
+  .card__icon-badge {
+    width: 5rem; /* 80px equivalent */
+    height: 5rem; /* 80px equivalent */
+    font-size: 2.5rem;
+  }
+  
+  /* Adjust typography for mobile */
+  h1 {
+    font-size: var(--font-size-3xl);
+  }
+  
+  h2 {
+    font-size: var(--font-size-2xl);
+  }
+  
+  h3 {
+    font-size: var(--font-size-xl);
+  }
+  
+  /* Ensure buttons are full width on very small screens */
+  @media (max-width: 30rem) { /* 480px equivalent */
+    .button {
+      width: 100%;
+    }
+  }
+}
+
+/* Tablet: 2 columns from 768px to 1024px */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .grid-layout {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-3);
+  }
+  
+  main {
+    padding: var(--spacing-3) !important;
+  }
+}
+
+/* Desktop: 3+ columns from 1024px */
+@media (min-width: 1024px) {
+  .grid-layout {
+    grid-template-columns: repeat(auto-fit, minmax(17.5rem, 1fr)); /* 280px equivalent */
+    gap: var(--spacing-4);
+  }
+  
+  main {
+    padding: var(--spacing-4) !important;
+  }
+}
+
+/* Large desktop: Max width container */
+@media (min-width: 1440px) {
+  main {
+    max-width: 87.5rem; /* 1400px equivalent */
+    margin: 0 auto;
+  }
+}
+
+/* Prevent horizontal scroll on all screen sizes */
+@media (min-width: 320px) and (max-width: 1920px) {
+  body,
+  html,
+  #root,
+  main {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+  
+  /* Ensure all content respects viewport width */
+  * {
+    max-width: 100%;
+  }
+  
+  /* Allow specific elements to be wider */
+  .card,
+  .button,
+  .input,
+  .textarea {
+    max-width: 100%;
+  }
+}
+
+/* Touch target sizes - minimum 40px on mobile */
+@media (max-width: 768px) {
+  .button,
+  .navigation__link,
+  .input,
+  .textarea {
+    min-height: 2.75rem; /* 44px equivalent - iOS recommended touch target */
+    min-width: 2.75rem; /* 44px equivalent */
+  }
+  
+  /* Increase tap area for interactive cards */
+  .card--interactive {
+    min-height: 2.75rem; /* 44px equivalent */
+  }
+}
+
+/* Responsive images and media */
+img,
+video,
+iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Responsive tables */
+@media (max-width: 768px) {
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+/* Footer responsive adjustments */
+footer {
+  width: 100%;
+  padding: var(--spacing-2);
+}
+
+@media (max-width: 768px) {
+  footer {
+    font-size: var(--font-size-sm);
+    padding: var(--spacing-1);
+  }
+  
+  footer p {
+    margin: var(--spacing-1) 0;
+  }
+}
+
+/* Utility classes for responsive visibility */
+.hide-mobile {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .hide-mobile {
+    display: none;
+  }
+}
+
+.show-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .show-mobile {
+    display: block;
+  }
+}
+
+/* Responsive spacing utilities */
+@media (max-width: 768px) {
+  .spacing-mobile-sm {
+    padding: var(--spacing-1);
+  }
+  
+  .spacing-mobile-md {
+    padding: var(--spacing-2);
+  }
+  
+  .spacing-mobile-lg {
+    padding: var(--spacing-3);
+  }
+}
+/* App container styles */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.app-main {
+  flex: 1;
+  padding: var(--spacing-4);
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+.app-footer {
+  padding: var(--spacing-2);
+  background-color: var(--color-bg-secondary);
+  text-align: center;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  width: 100%;
+}
+
+/* Responsive adjustments for app layout */
+@media (max-width: 768px) {
+  .app-main {
+    padding: var(--spacing-2);
+  }
+  
+  .app-footer {
+    padding: var(--spacing-1);
+    font-size: var(--font-size-xs);
+  }
+}

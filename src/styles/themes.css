@@ -1,0 +1,93 @@
+/**
+ * Theme Color Definitions
+ * 
+ * Light and dark theme color palettes with vibrant gradients.
+ * Light mode: Purple/indigo gradients
+ * Dark mode: Orange/yellow gradients
+ */
+
+/* Light Theme */
+[data-theme='light'] {
+  /* Background Colors */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f8f9fa;
+  --color-bg-tertiary: #e9ecef;
+
+  /* Text Colors */
+  --color-text-primary: #212529;
+  --color-text-secondary: #495057;
+  --color-text-tertiary: #6c757d;
+
+  /* Accent Colors */
+  --color-accent-primary: #6366f1;        /* Indigo */
+  --color-accent-primary-hover: #4f46e5;
+  --color-accent-secondary: #8b5cf6;      /* Purple */
+  --color-accent-tertiary: #a78bfa;
+  --color-accent-success: #10b981;        /* Green */
+  --color-accent-warning: #f59e0b;        /* Amber */
+  --color-accent-error: #ef4444;          /* Red */
+  --color-accent-info: #3b82f6;           /* Blue */
+
+  /* Gradients - Purple/Indigo theme */
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-secondary: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  --gradient-warm: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --gradient-cool: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --gradient-subtle: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+
+  /* Border */
+  --color-border: #dee2e6;
+}
+
+/* Dark Theme */
+[data-theme='dark'] {
+  /* Background Colors */
+  --color-bg-primary: #1a1a1a;
+  --color-bg-secondary: #2d2d2d;
+  --color-bg-tertiary: #3a3a3a;
+
+  /* Text Colors */
+  --color-text-primary: #f8f9fa;
+  --color-text-secondary: #e9ecef;
+  --color-text-tertiary: #adb5bd;
+
+  /* Accent Colors */
+  --color-accent-primary: #fb923c;        /* Orange */
+  --color-accent-primary-hover: #f97316;
+  --color-accent-secondary: #fbbf24;      /* Yellow */
+  --color-accent-tertiary: #fcd34d;
+  --color-accent-success: #34d399;        /* Emerald */
+  --color-accent-warning: #fbbf24;        /* Yellow */
+  --color-accent-error: #f87171;          /* Red */
+  --color-accent-info: #60a5fa;           /* Blue */
+
+  /* Gradients - Orange/Yellow theme */
+  --gradient-primary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --gradient-secondary: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+  --gradient-warm: linear-gradient(135deg, #ff9a56 0%, #feca57 100%);
+  --gradient-cool: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+  --gradient-subtle: linear-gradient(135deg, #2c2c2c 0%, #3a3a3a 100%);
+
+  /* Border */
+  --color-border: #495057;
+}
+
+/* Theme Transition - Apply to all color properties */
+* {
+  transition: background-color var(--transition-theme),
+              color var(--transition-theme),
+              border-color var(--transition-theme),
+              box-shadow var(--transition-theme);
+}
+
+/* Reduced motion support for theme transitions */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
+
+/* Prevent transition on initial load */
+.no-transition * {
+  transition: none !important;
+}

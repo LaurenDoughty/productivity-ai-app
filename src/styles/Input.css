@@ -1,0 +1,161 @@
+/**
+ * Input Component Styles
+ * 
+ * Reusable input and textarea components with theme-aware colors
+ * Features focus states, error states, labels, and helper text
+ */
+
+/* Input Wrapper */
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+  width: 100%;
+  margin-bottom: var(--spacing-4);
+}
+
+/* Label */
+.input-label {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-tight);
+}
+
+/* Base Input Styles */
+.input,
+.textarea {
+  /* Layout */
+  display: block;
+  width: 100%;
+  
+  /* Minimum height for comfortable interaction (2.5rem / 40px) */
+  min-height: 2.5rem;
+  
+  /* Spacing */
+  padding: var(--spacing-2) var(--spacing-3);
+  
+  /* Typography */
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-primary);
+  
+  /* Visual styling */
+  background-color: var(--color-bg-primary);
+  border: 0.125rem solid var(--color-border);
+  border-radius: var(--radius-base);
+  
+  /* Transitions */
+  transition: border-color var(--transition-fast),
+              box-shadow var(--transition-fast),
+              background-color var(--transition-theme);
+  
+  /* Remove default styles */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Textarea specific */
+.textarea {
+  min-height: 5rem; /* 80px equivalent */
+  resize: vertical;
+}
+
+/* Placeholder text with reduced opacity (50-60%) */
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--color-text-tertiary);
+  opacity: 0.55;
+}
+
+/* Focus State - Accent color border and glow shadow */
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--color-accent-primary);
+  box-shadow: 0 0 0 0.1875rem rgba(99, 102, 241, 0.1);
+}
+
+[data-theme='dark'] .input:focus,
+[data-theme='dark'] .textarea:focus {
+  box-shadow: 0 0 0 0.1875rem rgba(251, 146, 60, 0.15);
+}
+
+/* Error State - Error color border */
+.input--error,
+.textarea--error {
+  border-color: var(--color-accent-error);
+}
+
+.input--error:focus,
+.textarea--error:focus {
+  border-color: var(--color-accent-error);
+  box-shadow: 0 0 0 0.1875rem rgba(239, 68, 68, 0.1);
+}
+
+[data-theme='dark'] .input--error:focus,
+[data-theme='dark'] .textarea--error:focus {
+  box-shadow: 0 0 0 0.1875rem rgba(248, 113, 113, 0.15);
+}
+
+/* Disabled State */
+.input:disabled,
+.textarea:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: var(--color-bg-tertiary);
+}
+
+/* Helper Text and Error Messages */
+.input-message {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+}
+
+.input-message--helper {
+  color: var(--color-text-secondary);
+}
+
+.input-message--error {
+  color: var(--color-accent-error);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .input,
+  .textarea {
+    transition: none;
+  }
+}
+
+/* Focus-visible for keyboard navigation */
+.input:focus-visible,
+.textarea:focus-visible {
+  outline: 0.125rem solid var(--color-accent-primary);
+  outline-offset: 0.125rem;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+  .input,
+  .textarea {
+    /* Ensure minimum touch target size on mobile */
+    min-height: 2.75rem; /* 44px equivalent */
+    padding: var(--spacing-2);
+    font-size: 1rem; /* Prevent zoom on iOS */
+  }
+  
+  .textarea {
+    min-height: 6.25rem; /* 100px equivalent */
+  }
+  
+  .input-wrapper {
+    margin-bottom: var(--spacing-3);
+  }
+}

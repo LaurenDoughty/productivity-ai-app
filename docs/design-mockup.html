@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productivity Copilot - Design Mockup</title>
+    <style>
+        /* CSS Variables for Theme System */
+        :root {
+            /* Light Theme Colors - Optimized for readability */
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #f1f5f9;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-tertiary: #64748b;
+            
+            /* Accent Colors - Optimized for contrast and readability */
+            --accent-primary: #4f46e5;
+            --accent-primary-hover: #4338ca;
+            --accent-secondary: #ec4899;
+            --accent-tertiary: #7c3aed;
+            --accent-success: #059669;
+            --accent-warning: #d97706;
+            --accent-error: #dc2626;
+            --accent-info: #0891b2;
+            
+            /* Gradient Backgrounds - Softer, more readable */
+            --gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            --gradient-secondary: linear-gradient(135deg, #ec4899 0%, #f472b6 100%);
+            --gradient-warm: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+            --gradient-cool: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+            --gradient-subtle: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            
+            /* Borders and Shadows - Softer for reduced eye strain */
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.03);
+            --shadow-colored: 0 8px 20px -4px rgba(79, 70, 229, 0.25);
+            
+            /* Spacing Scale (8px base) */
+            --space-1: 0.5rem;
+            --space-2: 1rem;
+            --space-3: 1.5rem;
+            --space-4: 2rem;
+            --space-6: 3rem;
+            --space-8: 4rem;
+            
+            /* Typography */
+            --font-size-sm: 0.875rem;
+            --font-size-base: 1rem;
+            --font-size-lg: 1.125rem;
+            --font-size-xl: 1.25rem;
+            --font-size-2xl: 1.5rem;
+            --font-size-3xl: 1.875rem;
+            --font-size-4xl: 2.25rem;
+            
+            /* Border Radius */
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.5rem;
+            
+            /* Transitions */
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Dark Theme - Optimized for reduced eye strain */
+        [data-theme="dark"] {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-tertiary: #94a3b8;
+            
+            /* Dark Mode Accent Colors - Higher contrast for readability */
+            --accent-primary: #fb923c;
+            --accent-primary-hover: #f97316;
+            --accent-secondary: #f472b6;
+            --accent-tertiary: #a78bfa;
+            
+            /* Dark Mode Gradients - Warmer, more readable */
+            --gradient-primary: linear-gradient(135deg, #fb923c 0%, #f59e0b 100%);
+            --gradient-secondary: linear-gradient(135deg, #f472b6 0%, #fb923c 100%);
+            --gradient-warm: linear-gradient(135deg, #fbbf24 0%, #fcd34d 100%);
+            --gradient-cool: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+            --gradient-subtle: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            
+            /* Dark Mode Button Text */
+            --button-text: #0f172a;
+            
+            --border-color: #334155;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.25);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 10px 10px -5px rgba(0, 0, 0, 0.4);
+            --shadow-colored: 0 8px 20px -4px rgba(251, 146, 60, 0.35);
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.65;
+            letter-spacing: -0.011em;
+            transition: background-color var(--transition-slow), color var(--transition-slow);
+            position: relative;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 300px;
+            background: var(--gradient-primary);
+            opacity: 0.03;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background: var(--bg-secondary);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: var(--space-2) var(--space-4);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-slow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .navbar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--space-3);
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: var(--space-1) var(--space-2);
+            border-radius: var(--radius-md);
+            transition: color var(--transition-fast), background-color var(--transition-fast);
+            font-weight: 500;
+            font-size: 0.9375rem;
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+            background-color: var(--bg-tertiary);
+        }
+
+        .nav-link.active {
+            color: var(--accent-primary);
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.12) 0%, rgba(124, 58, 237, 0.12) 100%);
+            position: relative;
+        }
+
+        [data-theme="dark"] .nav-link.active {
+            background: linear-gradient(135deg, rgba(251, 146, 60, 0.18) 0%, rgba(245, 158, 11, 0.18) 100%);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 2px;
+            background: var(--accent-primary);
+            border-radius: 2px;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--space-1) var(--space-2);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: var(--space-1);
+            transition: all var(--transition-fast);
+            font-size: var(--font-size-base);
+            color: var(--text-primary);
+        }
+
+        .theme-toggle:hover {
+            background: var(--accent-primary);
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .theme-toggle:focus {
+            outline: 2px solid var(--accent-primary);
+            outline-offset: 2px;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--space-4);
+        }
+
+        .page-header {
+            margin-bottom: var(--space-6);
+        }
+
+        .page-title {
+            font-size: var(--font-size-4xl);
+            font-weight: 700;
+            margin-bottom: var(--space-2);
+            letter-spacing: -0.025em;
+            line-height: 1.2;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        [data-theme="dark"] .page-title {
+            background: var(--gradient-warm);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-subtitle {
+            font-size: var(--font-size-lg);
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        /* Card Component */
+        .card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-4);
+            margin-bottom: var(--space-3);
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-base);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity var(--transition-base);
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-xl);
+            transform: translateY(-4px);
+            border-color: transparent;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-title {
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            margin-bottom: var(--space-2);
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            letter-spacing: -0.015em;
+            line-height: 1.4;
+        }
+
+        .card-content {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: var(--font-size-base);
+        }
+
+        /* Button Components */
+        .btn {
+            padding: var(--space-2) var(--space-4);
+            border-radius: var(--radius-md);
+            border: none;
+            font-size: var(--font-size-base);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-1);
+            min-height: 40px;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: var(--shadow-colored);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        [data-theme="dark"] .btn-primary {
+            color: var(--button-text);
+            background: var(--gradient-warm);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-secondary);
+            border-color: var(--accent-primary);
+        }
+
+        .btn:focus {
+            outline: 2px solid var(--accent-primary);
+            outline-offset: 2px;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Form Inputs */
+        .form-group {
+            margin-bottom: var(--space-3);
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: var(--space-1);
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: var(--space-2);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: var(--font-size-base);
+            transition: all var(--transition-fast);
+            min-height: 40px;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.2);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Grid Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-3);
+            margin-bottom: var(--space-4);
+        }
+
+        /* Tab Navigation */
+        .tabs {
+            display: flex;
+            gap: var(--space-2);
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: var(--space-4);
+        }
+
+        .tab {
+            padding: var(--space-2) var(--space-3);
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: var(--font-size-base);
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            transition: all var(--transition-fast);
+        }
+
+        .tab:hover {
+            color: var(--text-primary);
+        }
+
+        .tab.active {
+            color: var(--accent-primary);
+            border-bottom-color: var(--accent-primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            border: 3px solid var(--bg-tertiary);
+            border-top: 3px solid var(--accent-primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: var(--space-4) auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: var(--space-4);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: var(--font-size-sm);
+            margin-top: var(--space-8);
+        }
+
+        /* Design Annotations */
+        .annotation {
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.08) 0%, rgba(124, 58, 237, 0.08) 100%);
+            border-left: 4px solid var(--accent-primary);
+            padding: var(--space-3);
+            margin: var(--space-3) 0;
+            border-radius: var(--radius-lg);
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            box-shadow: var(--shadow-sm);
+            line-height: 1.6;
+        }
+
+        [data-theme="dark"] .annotation {
+            background: linear-gradient(135deg, rgba(251, 146, 60, 0.12) 0%, rgba(245, 158, 11, 0.12) 100%);
+        }
+
+        /* Icon Badge - Larger and more integrated */
+        .icon-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 120px;
+            height: 120px;
+            border-radius: var(--radius-2xl);
+            background: var(--gradient-primary);
+            font-size: 3.5rem;
+            box-shadow: var(--shadow-xl);
+            margin-bottom: var(--space-3);
+            transition: transform var(--transition-base);
+        }
+
+        [data-theme="dark"] .icon-badge {
+            background: var(--gradient-warm);
+        }
+
+        .card:hover .icon-badge {
+            transform: scale(1.15) rotate(5deg);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: var(--space-2);
+                padding: var(--space-3);
+            }
+
+            .nav-links {
+                flex-direction: row;
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .nav-link {
+                flex: 0 0 auto;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: var(--space-3);
+            }
+
+            .page-title {
+                font-size: var(--font-size-3xl);
+            }
+
+            .page-subtitle {
+                font-size: var(--font-size-base);
+            }
+
+            .tabs {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+
+            .tabs::-webkit-scrollbar {
+                display: none;
+            }
+
+            .tab {
+                white-space: nowrap;
+                flex-shrink: 0;
+            }
+
+            .card {
+                padding: var(--space-3);
+            }
+
+            .icon-badge {
+                width: 96px;
+                height: 96px;
+                font-size: 3rem;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .form-group {
+                margin-bottom: var(--space-2);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header {
+                margin-bottom: var(--space-4);
+            }
+
+            .page-title {
+                font-size: var(--font-size-2xl);
+            }
+
+            .container {
+                padding: var(--space-2);
+            }
+
+            .navbar {
+                padding: var(--space-2);
+            }
+
+            .card {
+                padding: var(--space-2);
+                margin-bottom: var(--space-2);
+            }
+
+            .icon-badge {
+                width: 80px;
+                height: 80px;
+                font-size: 2.5rem;
+                margin-bottom: var(--space-2);
+            }
+
+            .card-title {
+                font-size: var(--font-size-lg);
+            }
+
+            .card-content {
+                font-size: var(--font-size-sm);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li><a href="#" class="nav-link active">Home</a></li>
+            <li><a href="#" class="nav-link">Strategies</a></li>
+            <li><a href="#" class="nav-link">Optimizer</a></li>
+        </ul>
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+            <span id="theme-icon">🌙</span>
+            <span id="theme-text">Dark Mode</span>
+        </button>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Tabs for Different Pages -->
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('home')">Home Page</button>
+            <button class="tab" onclick="showTab('strategies')">Strategies Page</button>
+            <button class="tab" onclick="showTab('optimizer')">Optimizer Page</button>
+            <button class="tab" onclick="showTab('components')">Components</button>
+        </div>
+
+        <!-- Home Page Content -->
+        <div id="home" class="tab-content active">
+            <div class="page-header">
+                <h1 class="page-title">Welcome to Productivity Copilot</h1>
+                <p class="page-subtitle">AI-powered productivity optimization for your workflow</p>
+            </div>
+
+            <div class="annotation">
+                <strong>🎨 Design Note:</strong> Optimized color palette with improved contrast ratios for better readability. Light mode uses indigo/purple gradients, dark mode uses warm orange/yellow. Typography enhanced with proper letter-spacing and line-height for reduced eye strain.
+            </div>
+
+            <div class="grid">
+                <div class="card">
+                    <div class="icon-badge">🎯</div>
+                    <h3 class="card-title">Smart Strategies</h3>
+                    <p class="card-content">
+                        Discover personalized productivity strategies tailored to your work style and goals.
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="icon-badge">⚡</div>
+                    <h3 class="card-title">AI Optimization</h3>
+                    <p class="card-content">
+                        Get intelligent suggestions to optimize your workflow and eliminate bottlenecks.
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="icon-badge">📊</div>
+                    <h3 class="card-title">Progress Tracking</h3>
+                    <p class="card-content">
+                        Monitor your productivity improvements with detailed analytics and insights.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">Get Started</h3>
+                <p class="card-content" style="margin-bottom: var(--space-3);">
+                    Ready to boost your productivity? Start by exploring our AI-powered strategies or jump straight to the optimizer.
+                </p>
+                <div style="display: flex; gap: var(--space-2);">
+                    <button class="btn btn-primary">Explore Strategies</button>
+                    <button class="btn btn-secondary">Try Optimizer</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Strategies Page Content -->
+        <div id="strategies" class="tab-content">
+            <div class="page-header">
+                <h1 class="page-title">Productivity Strategies</h1>
+                <p class="page-subtitle">Evidence-based techniques to enhance your workflow</p>
+            </div>
+
+            <div class="annotation">
+                <strong>🎨 Design Note:</strong> Cards feature gradient top borders on hover and softer shadows for reduced eye strain. Large icon badges (120x120px) serve as visual anchors and improve scannability.
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">Time Blocking</h3>
+                <p class="card-content">
+                    Divide your day into dedicated blocks of time for specific tasks. This technique helps maintain focus and prevents context switching.
+                </p>
+                <div style="margin-top: var(--space-3);">
+                    <button class="btn btn-primary">Learn More</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">Pomodoro Technique</h3>
+                <p class="card-content">
+                    Work in focused 25-minute intervals followed by short breaks. This method improves concentration and prevents burnout.
+                </p>
+                <div style="margin-top: var(--space-3);">
+                    <button class="btn btn-primary">Learn More</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">Priority Matrix</h3>
+                <p class="card-content">
+                    Organize tasks by urgency and importance. Focus on high-impact activities that drive results.
+                </p>
+                <div style="margin-top: var(--space-3);">
+                    <button class="btn btn-primary">Learn More</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Optimizer Page Content -->
+        <div id="optimizer" class="tab-content">
+            <div class="page-header">
+                <h1 class="page-title">AI Workflow Optimizer</h1>
+                <p class="page-subtitle">Get personalized suggestions to improve your productivity</p>
+            </div>
+
+            <div class="annotation">
+                <strong>🎨 Design Note:</strong> Form inputs feature high-contrast focus states with subtle glowing shadows. Gradient buttons include smooth shine animations on hover for visual feedback.
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">Describe Your Workflow</h3>
+                <form>
+                    <div class="form-group">
+                        <label class="form-label" for="workflow">Current Workflow</label>
+                        <textarea 
+                            id="workflow" 
+                            class="form-textarea" 
+                            placeholder="Describe your current workflow, challenges, and goals..."
+                        ></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="context">Additional Context</label>
+                        <input 
+                            type="text" 
+                            id="context" 
+                            class="form-input" 
+                            placeholder="Team size, industry, tools used..."
+                        />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Generate Optimization</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">AI Suggestions</h3>
+                <div class="spinner"></div>
+                <p class="card-content" style="text-align: center; color: var(--text-tertiary);">
+                    Analyzing your workflow...
+                </p>
+            </div>
+        </div>
+
+        <!-- Components Showcase -->
+        <div id="components" class="tab-content">
+            <div class="page-header">
+                <h1 class="page-title">Design System Components</h1>
+                <p class="page-subtitle">All UI components in light and dark themes</p>
+            </div>
+
+            <div class="annotation">
+                <strong>🎨 Color Palette:</strong> Light mode - Indigo/Purple gradients (#4f46e5 → #7c3aed) optimized for WCAG AA contrast | Dark mode - Warm orange/yellow gradients (#fb923c → #fbbf24) with enhanced readability. All text meets 4.5:1 contrast ratio minimum.
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">Buttons</h3>
+                <div style="display: flex; gap: var(--space-2); flex-wrap: wrap;">
+                    <button class="btn btn-primary">Primary Button</button>
+                    <button class="btn btn-secondary">Secondary Button</button>
+                    <button class="btn btn-primary" disabled>Disabled Button</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">Form Inputs</h3>
+                <div class="form-group">
+                    <label class="form-label">Text Input</label>
+                    <input type="text" class="form-input" placeholder="Enter text..." />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Textarea</label>
+                    <textarea class="form-textarea" placeholder="Enter longer text..."></textarea>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">Typography Scale</h3>
+                <h1 style="font-size: var(--font-size-3xl); margin-bottom: var(--space-2);">Heading 1 (1.875rem)</h1>
+                <h2 style="font-size: var(--font-size-2xl); margin-bottom: var(--space-2);">Heading 2 (1.5rem)</h2>
+                <h3 style="font-size: var(--font-size-xl); margin-bottom: var(--space-2);">Heading 3 (1.25rem)</h3>
+                <p style="font-size: var(--font-size-base); margin-bottom: var(--space-2);">Body text (1rem)</p>
+                <p style="font-size: var(--font-size-sm);">Small text (0.875rem)</p>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">Loading States</h3>
+                <div class="spinner"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Productivity Copilot v1.0.0</p>
+        <p>Modern UI Design System</p>
+    </footer>
+
+    <script>
+        // Theme Toggle Functionality
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // Update button text and icon
+            const icon = document.getElementById('theme-icon');
+            const text = document.getElementById('theme-text');
+            
+            if (newTheme === 'dark') {
+                icon.textContent = '☀️';
+                text.textContent = 'Light Mode';
+            } else {
+                icon.textContent = '🌙';
+                text.textContent = 'Dark Mode';
+            }
+        }
+
+        // Load saved theme on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            
+            const icon = document.getElementById('theme-icon');
+            const text = document.getElementById('theme-text');
+            
+            if (savedTheme === 'dark') {
+                icon.textContent = '☀️';
+                text.textContent = 'Light Mode';
+            }
+        });
+
+        // Tab Navigation
+        function showTab(tabName) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

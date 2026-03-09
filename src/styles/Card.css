@@ -1,0 +1,155 @@
+/**
+ * Card Component Styles
+ * 
+ * Reusable card component with enhanced icon badge (120x120px)
+ * Features theme-aware colors, subtle shadows, and interactive hover states
+ */
+
+.card {
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  /* Spacing */
+  padding: var(--spacing-4);
+  
+  /* Visual styling */
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-base);
+  
+  /* Transitions */
+  transition: box-shadow var(--transition-base),
+              transform var(--transition-base);
+}
+
+/* Icon Badge - Large, prominent at top-center */
+.card__icon-badge {
+  /* Size - 7.5rem x 7.5rem (120px equivalent) as specified */
+  width: 7.5rem;
+  height: 7.5rem;
+  
+  /* Layout */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  
+  /* Spacing */
+  margin-bottom: var(--spacing-3);
+  
+  /* Visual styling */
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-xl);
+  
+  /* Icon size - 3.5rem emoji size */
+  font-size: 3.5rem;
+  
+  /* Transitions for hover animation */
+  transition: transform var(--transition-base);
+}
+
+/* Icon Badge Gradient Variants */
+.card__icon-badge--primary {
+  background: var(--gradient-primary);
+}
+
+.card__icon-badge--secondary {
+  background: var(--gradient-secondary);
+}
+
+.card__icon-badge--warm {
+  background: var(--gradient-warm);
+}
+
+.card__icon-badge--cool {
+  background: var(--gradient-cool);
+}
+
+.card__icon-badge--subtle {
+  background: var(--gradient-subtle);
+}
+
+/* Card Content */
+.card__content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+/* Interactive Card Hover States */
+.card--interactive {
+  cursor: pointer;
+}
+
+.card--interactive:hover {
+  /* Elevation change - increase shadow */
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.card--interactive:hover .card__icon-badge {
+  /* Icon badge hover animation - scale 1.15x, rotate 5deg */
+  transform: scale(1.15) rotate(5deg);
+}
+
+/* Reduced motion support for card animations */
+@media (prefers-reduced-motion: reduce) {
+  .card--interactive:hover {
+    transform: none;
+  }
+  
+  .card--interactive:hover .card__icon-badge {
+    transform: none;
+  }
+  
+  .card--interactive:active {
+    transform: none;
+  }
+}
+
+/* Focus state for keyboard navigation */
+.card--interactive:focus-visible {
+  outline: 0.125rem solid var(--color-accent-primary);
+  outline-offset: 0.125rem;
+}
+
+/* Active state */
+.card--interactive:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-base);
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+  .card {
+    padding: var(--spacing-3);
+  }
+  
+  .card__icon-badge {
+    width: 5rem; /* 80px equivalent */
+    height: 5rem; /* 80px equivalent */
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-2);
+  }
+  
+  .card__content {
+    gap: var(--spacing-1);
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .card {
+    padding: var(--spacing-3);
+  }
+  
+  .card__icon-badge {
+    width: 6.25rem; /* 100px equivalent */
+    height: 6.25rem; /* 100px equivalent */
+    font-size: 3rem;
+  }
+}
