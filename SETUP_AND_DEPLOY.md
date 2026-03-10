@@ -67,7 +67,7 @@ git push -u origin main
 Scroll down to "Environment Variables" section:
 - Click "Add Environment Variable"
 - **Key**: `GROQ_API_KEY`
-- **Value**: `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`
+- **Value**: `your_groq_api_key_here`
 
 6. Click "Create Web Service"
 

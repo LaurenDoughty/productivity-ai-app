@@ -6,7 +6,7 @@ This guide will help you deploy your Productivity Copilot app to Render.com for 
 
 1. A GitHub account
 2. A Render.com account (sign up at https://render.com - free)
-3. Your Groq API key: `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`
+3. Your Groq API key (get one free at https://console.groq.com)
 
 ## Step 1: Push Your Code to GitHub
 
@@ -52,7 +52,7 @@ Render will auto-detect your `render.yaml` file. Verify these settings:
 In the Render dashboard, add this environment variable:
 
 - **Key**: `GROQ_API_KEY`
-- **Value**: `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`
+- **Value**: `your_groq_api_key_here`
 
 ## Step 5: Deploy
 

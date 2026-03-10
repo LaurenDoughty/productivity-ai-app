@@ -42,7 +42,7 @@ git push -u origin main
 4. Render will auto-detect `render.yaml`
 5. Add environment variable:
    - Key: `GROQ_API_KEY`
-   - Value: `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`
+   - Value: `your_groq_api_key_here`
 6. Click "Create Web Service"
 7. Wait 5-10 minutes for deployment
 
