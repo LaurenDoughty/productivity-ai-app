@@ -18,15 +18,14 @@ AI-powered productivity optimization tool optimized for AWS Elastic Beanstalk de
 - Clear deployment/runbook steps
 
 ## Deployment Model
-This application is deployed as a single Elastic Beanstalk environment. The Node/Express server hosts the API and serves the compiled React frontend from the same deployment artifact. Secrets (e.g., GROQ_API_KEY) are provided via Elastic Beanstalk environment variables and are not exposed to the client.
+This application is deployed as a single Elastic Beanstalk environment. The Node/Express server hosts the API and serves the compiled React frontend from the same deployment artifact. Secrets (e.g., GROQ_API_KEY) are provided via Elastic Beanstalk environment variables and are not exposed to the client. Groq calls are made server-side via Express.
 
-## AI Safety & Guardrails
- - No sensitive data required: the app is designed for general workflow text; users should not enter regulated data (FERPA/PII).
- - Client-side storage only: no server-side persistence of user prompts/results.
-
-## AI Safety & Data Handling Practices
-- Client-side storage only: the application does not persist user-entered workflow data on the server.
-- Secrets management: API keys are provided via environment variables and are not committed to source control.
+## AI Safety, Data Handling & Guardrails
+- Data storage (client-side only)
+- Secrets management (server env vars)
+- Rate limiting / sanitization
+- Logging policy (don’t log prompts)
+- server processes requests in-memory and does not write prompts or results to a database or server-side file storage
 
 ## Quick Start
 
@@ -36,6 +35,8 @@ This application is deployed as a single Elastic Beanstalk environment. The Node
 - npm or yarn
 - AWS account (for deployment)
 - EB CLI (for deployment)
+- AWS CLI (often needed for EB CLI auth)
+- Node version manager optional
 
 ### Installation
 
@@ -57,10 +58,9 @@ cp .env.template .env
 VITE_GROQ_API_KEY=your_api_key_here
 ```
 
-**Bedrock**
-```
-AWS Bedrock (Planned / Partial) Bedrock support is under development. For production AWS deployments, prefer IAM role-based access (instance profile) rather than storing long-lived AWS credentials in environment variables or .env files.
-```
+#### AWS Bedrock (Planned / Partial)
+Bedrock support is under development. For AWS deployments, prefer IAM role-based access (instance profile). Do not store long-lived AWS credentials in `.env`.
+
 
 ### Development
 
@@ -82,10 +82,11 @@ npm run test:unit
 npm run test:property
 ```
 
-AI Provider Status
-Provider	Status	Notes
-Groq	✅ Working	Current default provider; API key via environment variable
-AWS Bedrock (Claude 3.5 Sonnet)	🟡 Partial	Architecture support in progress; finalize IAM role-based auth + permissions
+### AI Provider Status
+| Provider | Status | Notes |
+|---|---:|---|
+| Groq | ✅ Working | Current default provider; API key provided via server environment variable |
+| AWS Bedrock (Claude 3.5 Sonnet) | 🟡 Partial | Under development; finalize IAM role-based auth + permissions |
 
 ## Deployment
 
@@ -150,7 +151,7 @@ bash deployment/rollback.sh
 - Input sanitization
 - Rate limiting
 - HTTPS-only in production
-- Secure headers (X-Frame-Options, X-XSS-Protection, etc.)
+- Secure headers (e.g., X-Frame-Options, Referrer-Policy, Permissions-Policy, X-Content-Type-Options)
 
 ## Monitoring
 
@@ -168,6 +169,9 @@ bash deployment/rollback.sh
 - Bundle optimization (< 500KB)
 - Single t3.micro instance
 - CloudFront CDN for static assets
+
+## CI/CD
+- GitHub Actions CI runs lint, tests, and build on pull requests and merges. (Planned / In progress)
 
 ## Troubleshooting
 
