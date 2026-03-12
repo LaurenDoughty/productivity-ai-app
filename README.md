@@ -44,8 +44,8 @@ VITE_GEMINI_API_KEY=your_api_key_here
 ```env
 VITE_AI_PROVIDER=bedrock
 AWS_REGION=us-east-1
-AWS_ACCESS_KEY_ID=your_access_key
-AWS_SECRET_ACCESS_KEY=your_secret_key
+Local development (Bedrock): authenticate using an AWS CLI profile (AWS SSO or short-lived credentials). Do not store long-lived AWS keys in .env.
+Elastic Beanstalk (Bedrock): grant Bedrock access via the EC2 instance profile (IAM role). Configure only non-secret settings (e.g., VITE_AI_PROVIDER, AWS_REGION) as environment variables.
 ```
 
 ### Development
