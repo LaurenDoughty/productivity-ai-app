@@ -17,6 +17,9 @@ AI-powered productivity optimization tool optimized for AWS Elastic Beanstalk de
 - Guardrails: rate limiting, input sanitization, CSP, secure headers
 - Clear deployment/runbook steps
 
+## Deployment Model
+This application is deployed as a single Elastic Beanstalk environment. The Node/Express server hosts the API and serves the compiled React frontend from the same deployment artifact. Secrets (e.g., GROQ_API_KEY) are provided via Elastic Beanstalk environment variables and are not exposed to the client.
+
 ## AI Safety & Guardrails
  - No sensitive data required: the app is designed for general workflow text; users should not enter regulated data (FERPA/PII).
  - Client-side storage only: no server-side persistence of user prompts/results.
