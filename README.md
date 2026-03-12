@@ -4,11 +4,26 @@ AI-powered productivity optimization tool optimized for AWS Elastic Beanstalk de
 
 ## Features
 
-- **Hybrid AI Provider System**: Switch between Google Gemini (free tier) and AWS Bedrock (Claude 3.5 Sonnet) without code changes
-- **Multi-Level Caching**: Memory, localStorage, and service worker caching to minimize API costs
-- **Optimized Build**: Bundle size < 500KB (gzipped) with code splitting and lazy loading
-- **Production Ready**: Health checks, monitoring, logging, and error handling
-- **AWS Free Tier Optimized**: Designed to run on t3.micro instances with minimal costs
+ - Groq LLM Integration (Working): AI-powered workflow optimization using Groq (API-key based)
+ - Pluggable AI Provider Architecture: Provider abstraction designed to support additional providers (e.g., AWS Bedrock) as a future enhancement
+ - Multi-Level Caching: Memory, localStorage, and service worker caching to minimize API costs and improve responsiveness
+ - Production Ready: Health checks, monitoring/logging, and robust error handling
+ - AWS Free Tier Optimized: Designed to run on Elastic Beanstalk single-instance environments (t3.micro) with minimal cost
+
+## Relevance (Higher-Ed / Institutional Use)
+
+- Designed for low-cost hosting and operational visibility (CloudWatch logs/health)
+- No server-side storage of user data (privacy-friendly)
+- Guardrails: rate limiting, input sanitization, CSP, secure headers
+- Clear deployment/runbook steps
+
+## AI Safety & Guardrails
+ - No sensitive data required: the app is designed for general workflow text; users should not enter regulated data (FERPA/PII).
+ - Client-side storage only: no server-side persistence of user prompts/results.
+
+## AI Safety & Data Handling Practices
+- Client-side storage only: the application does not persist user-entered workflow data on the server.
+- Secrets management: API keys are provided via environment variables and are not committed to source control.
 
 ## Quick Start
 
@@ -34,18 +49,14 @@ cp .env.template .env
 
 2. Configure your AI provider:
 
-**For Gemini (Development/Free Tier):**
-```env
-VITE_AI_PROVIDER=gemini
-VITE_GEMINI_API_KEY=your_api_key_here
+**Groq: Current/Working**
+```VITE_AI_PROVIDER=groq
+VITE_GROQ_API_KEY=your_api_key_here
 ```
 
-**For Bedrock (Production/AWS-Native):**
-```env
-VITE_AI_PROVIDER=bedrock
-AWS_REGION=us-east-1
-Local development (Bedrock): authenticate using an AWS CLI profile (AWS SSO or short-lived credentials). Do not store long-lived AWS keys in .env.
-Elastic Beanstalk (Bedrock): grant Bedrock access via the EC2 instance profile (IAM role). Configure only non-secret settings (e.g., VITE_AI_PROVIDER, AWS_REGION) as environment variables.
+**Bedrock**
+```
+AWS Bedrock (Planned / Partial) Bedrock support is under development. For production AWS deployments, prefer IAM role-based access (instance profile) rather than storing long-lived AWS credentials in environment variables or .env files.
 ```
 
 ### Development
@@ -68,19 +79,10 @@ npm run test:unit
 npm run test:property
 ```
 
-## AI Provider Comparison
-
-### Google Gemini
-- **Cost**: Free tier available (60 requests/minute)
-- **Best for**: Development, testing, low-volume production
-- **Pros**: No cost, easy setup, good performance
-- **Cons**: External service, rate limits, less AWS integration
-
-### AWS Bedrock (Claude 3.5 Sonnet)
-- **Cost**: $3.00 per million input tokens, $15.00 per million output tokens
-- **Best for**: Production, high-volume, AWS-native deployments
-- **Pros**: AWS-native, better integration, higher limits
-- **Cons**: Paid service, requires AWS credentials
+AI Provider Status
+Provider	Status	Notes
+Groq	✅ Working	Current default provider; API key via environment variable
+AWS Bedrock (Claude 3.5 Sonnet)	🟡 Partial	Architecture support in progress; finalize IAM role-based auth + permissions
 
 ## Deployment
 
@@ -202,5 +204,5 @@ npm run analyze-bundle
 Apache-2.0
 
 ## Support
-
+Portions of this documentation were drafted with AI assistance and reviewed/edited for technical accuracy.
 For issues and questions, please open an issue on GitHub.
